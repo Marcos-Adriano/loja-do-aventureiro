@@ -582,6 +582,7 @@ public:
             exit(0); //se falar encerra o programa
         }   //percorre a lista de armamentos e vai escrevendo no arquivo Estoque.txt todos os armamentos
         for (armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
+            std::cout << armamento->getId();
             resultado = fprintf(arquivo,"ID -> %d; Nome -> %s; Tipo -> %s; Custo -> %.2f PO; Dano -> %.2f; Unidades em estoque -> %d\n\n",
                                 armamento->getId(), armamento->getNome().c_str(), armamento->getTipo().c_str(), 
                                 armamento->getCusto(), armamento->getDano(), armamento->getQtdEstoque()
@@ -738,7 +739,7 @@ public:
                     std::cin >> unidades;
                     if(armamento->getQtdEstoque() >= unidades){ 
                         desconto = 2 * qtdPrimos(unidades);
-                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 * unidades <<" PO\nValor com desconto: " << (1 - desconto * 0.01) * valorUnitario * unidades << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
+                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 * unidades <<" PO\nValor final: " << (1 - desconto * 0.01) * valorUnitario * unidades << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
                         std::cin >> prossegue;
                         switch (prossegue){
                         case 1:
@@ -787,7 +788,7 @@ public:
                     std::cin >> unidades;
                     if(armadura->getQtdEstoque() >= unidades){ 
                         desconto = 2 * qtdPrimos(unidades);
-                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 * unidades <<" PO\nValor com desconto: " << (1 - desconto * 0.01) * valorUnitario * unidades << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
+                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 * unidades <<" PO\nValor final: " << (1 - desconto * 0.01) * valorUnitario * unidades << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
                         std::cin >> prossegue;
                         switch (prossegue){
                         case 1:
@@ -835,7 +836,7 @@ public:
                     std::cin >> unidades;
                     if(consumivel->getQtdEstoque() >= unidades){ 
                         desconto = 2 * qtdPrimos(unidades);
-                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 * unidades <<" PO\nValor com desconto: " << (1 - desconto * 0.01) * valorUnitario * unidades << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
+                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 * unidades <<" PO\nValor final: " << (1 - desconto * 0.01) * valorUnitario * unidades << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
                         std::cin >> prossegue;
                         switch (prossegue){
                         case 1:  //SIM
