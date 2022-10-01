@@ -738,12 +738,12 @@ public:
                     std::cin >> unidades;
                     if(armamento->getQtdEstoque() >= unidades){ 
                         desconto = 2 * qtdPrimos(unidades);
-                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 <<" PO\nValor com desconto: " << (1 - (desconto * valorUnitario * 0.0001)) * valorUnitario << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
+                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 * unidades <<" PO\nValor com desconto: " << (1 - desconto * 0.01) * valorUnitario * unidades << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
                         std::cin >> prossegue;
                         switch (prossegue){
                         case 1:
                             armamento->setQtdEstoque(armamento->getQtdEstoque() - unidades); //VENDIDO AQUI!!
-                            listaLogVendas.push_back(LogVendas(idEscolhido, unidades, armamento->getNome(), unidades * valorUnitario, (1 - (desconto * valorUnitario * 0.0001)) * valorUnitario));
+                            listaLogVendas.push_back(LogVendas(idEscolhido, unidades, armamento->getNome(), unidades * valorUnitario, (1 - desconto * 0.01) * valorUnitario * unidades));
                             if(unidades == 1){
                                 std::cout <<"Uma unidade vendida com sucesso!\n";
                                 return true;
@@ -787,12 +787,12 @@ public:
                     std::cin >> unidades;
                     if(armadura->getQtdEstoque() >= unidades){ 
                         desconto = 2 * qtdPrimos(unidades);
-                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 <<" PO\nValor com desconto: " << 1 - desconto * valorUnitario * 0.0001 << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
+                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 * unidades <<" PO\nValor com desconto: " << (1 - desconto * 0.01) * valorUnitario * unidades << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
                         std::cin >> prossegue;
                         switch (prossegue){
                         case 1:
                             armadura->setQtdEstoque(armadura->getQtdEstoque() - unidades); //VENDIDO AQUI!!
-                            listaLogVendas.push_back(LogVendas(idEscolhido, unidades, armadura->getNome(), unidades * valorUnitario, (1 - (desconto * valorUnitario * 0.0001)) * valorUnitario));
+                            listaLogVendas.push_back(LogVendas(idEscolhido, unidades, armadura->getNome(), unidades * valorUnitario,(1 - desconto * 0.01) * valorUnitario * unidades));
                             if(unidades == 1){
                                 std::cout <<"Uma unidade vendida com sucesso!\n";
                                 return true;
@@ -835,12 +835,12 @@ public:
                     std::cin >> unidades;
                     if(consumivel->getQtdEstoque() >= unidades){ 
                         desconto = 2 * qtdPrimos(unidades);
-                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 <<" PO\nValor com desconto: " << 1 - desconto * valorUnitario * 0.0001 << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
+                        std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 * unidades <<" PO\nValor com desconto: " << (1 - desconto * 0.01) * valorUnitario * unidades << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
                         std::cin >> prossegue;
                         switch (prossegue){
                         case 1:  //SIM
                             consumivel->setQtdEstoque(consumivel->getQtdEstoque() - unidades); //VENDIDO AQUI!!
-                            listaLogVendas.push_back(LogVendas(idEscolhido, unidades, consumivel->getNome(), unidades * valorUnitario, (1 - (desconto * valorUnitario * 0.0001)) * valorUnitario));
+                            listaLogVendas.push_back(LogVendas(idEscolhido, unidades, consumivel->getNome(), unidades * valorUnitario,(1 - desconto * 0.01) * valorUnitario * unidades));
                             if(unidades == 1){
                                 std::cout <<"Uma unidade vendida com sucesso!\n";
                                 return true;
@@ -860,7 +860,7 @@ public:
                             break;
                         }
                     }else{
-                        std::cout << "Só tem " << consumivel->getQtdEstoque() << " deste item no estoque! Escolha outra quantia!\n";
+                        std::cout << "So tem " << consumivel->getQtdEstoque() << " deste item no estoque! Escolha outra quantia!\n";
                     }
                 } while (escolhe != 0);
             }
