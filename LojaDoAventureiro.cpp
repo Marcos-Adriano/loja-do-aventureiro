@@ -71,7 +71,7 @@ public:
         this->setCusto(custo);
         this->setDano(dano);
         this->setQtdEstoque(0);
-        system("clear||cls");
+        // system("clear||cls");
         std::cout << "Armamento criado com sucesso!\n\n";
     }
 
@@ -107,7 +107,7 @@ public:
         this->setCusto(custo);
         this->setDurabilidade(durabilidade);
         this->setQtdEstoque(0);
-        system("clear||cls");
+        // system("clear||cls");
         std::cout << "Armadura criada com sucesso!\n\n";
     }
 
@@ -142,7 +142,7 @@ public:
         this->setCusto(custo);
         this->setUsos(usos);
         this->setQtdEstoque(0);
-        system("clear||cls");
+        // system("clear||cls");
         std::cout << "Consumivel criado com sucesso!\n\n";
     }
 
@@ -959,8 +959,8 @@ public:
 int main(){
     setlocale(LC_ALL, "Portuguese");
     Menu menu;
-    listaArmamentos.push_back(Armamentos("Espada", "Fogo", 90, 70, 10));
-    listaArmaduras.push_back(Armaduras("Esqueleto", "Osso", 80, 100, 3));
+    listaArmamentos.push_back(Armamentos("Espada", "Fogo", 80, 7, 10));
+    listaArmaduras.push_back(Armaduras("Peitoral", "Osso", 90, 100, 3));
     listaConsumiveis.push_back(Consumiveis("Cogumelo", "Verde", 10, 1, 100));
     menu.menuPrincipal();
    
