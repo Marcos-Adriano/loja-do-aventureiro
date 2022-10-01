@@ -15,7 +15,7 @@ private:
     std::string nome, tipo;
     float custo;
     
-public:
+public:  //metodos get e set
     int& getId(){
         return id;
     }
@@ -138,6 +138,8 @@ private:
     float custoInicial, custoFinal;
 
 public:
+    LogVendas(){}
+
     int& getIdVenda() {
         return idVenda;
     }
@@ -195,7 +197,7 @@ public:
         this->custoFinal = custoFinal;
     }
 
-    void chamaLogVendas(){
+    void chamaLogVendas(){   //lista todos os log de vendas ja feitos
         std::cout << "\nLogs de vendas: " << '\n';
         for(logVenda = listaLogVendas.begin(); logVenda != listaLogVendas.end(); logVenda++){
             std::cout << "ID da venda: " << logVenda->getIdVenda() << '\n';
@@ -353,24 +355,24 @@ public:
         } while(escolhaRemoveItem != 0);
     }
 
-    bool removeArmamento(){
-        int idEscolhido;
+    bool removeArmamento(){   //funcao que retorna verdadeiro se o armamento for removido
+        int idEscolhido;     
         listarArmamentos();
         std::cout << "Escolha o ID do armamento que deseja remover: ";
         std::cin >> idEscolhido;
-
+        //funcao que percorre a lista de armamentos até achar o id escolhido pelo usuario
         for(armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
-            if (armamento->getId() == idEscolhido){
-                listaArmamentos.erase(armamento);
-                std::cout << "Armadura removida com sucesso!\n";
-                return true;
+            if (armamento->getId() == idEscolhido){  //se o armamento for encontrado 
+                listaArmamentos.erase(armamento);   //ele sera removido
+                std::cout << "Armamento removido com sucesso!\n";
+                return true;                       // e retornara verdadeiro
             }
         }
         std::cout << "ID nao encontrado!";
         return false;
     }
 
-    bool removeArmadura(){
+    bool removeArmadura(){ 
         int idEscolhido;
         listarArmaduras();
         std::cout << "Escolha o ID da armadura que deseja remover: ";
@@ -406,8 +408,7 @@ public:
 
     void adicionarUnidade(){
         int escolhaAdicionaItem = -1;
-        do
-        {
+        do{           
             std::cout << "Voce quer adicionar qual tipo de item?\n";
             std::cout << "1 - Armamento\n2 - Armadura\n3 - Consumivel\n0 - Voltar\nEscolha?" ;
             std::cin >> escolhaAdicionaItem;
@@ -492,9 +493,7 @@ public:
         return false;
     }
 
-    
-
-    void listarArmamentos(){
+    void listarArmamentos(){    // lista todos armamentos ja feitos
         std::cout << "\nLista de armamentos: " << '\n';
         for(armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
             std::cout << "ID: " << armamento->getId() << '\n';
@@ -530,7 +529,7 @@ public:
         }
     }
 
-    void listarEstoque(){   
+    void listarEstoque(){   //lista todos os itens do estoque
         // system("clear||cls");
         std::cout << "Lista de itens:\n";
         listarArmaduras();
@@ -538,8 +537,8 @@ public:
         listarConsumiveis();
     }
 
-    void exportarEstoque(){
-        exportarArmamentos();
+    void exportarEstoque(){   //cria um arquvo .txt com todo o estoque atual
+        exportarArmamentos(); 
         exportarArmaduras();
         exportarConsumiveis();
         std::cout << "Exportacao concluida!";
@@ -548,12 +547,12 @@ public:
     void exportarArmamentos(){
         int resultado;
         FILE *arquivo;
-        arquivo = fopen("Estoque.txt", "wt");
+        arquivo = fopen("Estoque.txt", "a");// cria um arquivo chamado Estoque.txt
         if (arquivo == NULL) // Se nao conseguiu criar
         {
             printf("Falha ao criar arquivo!\n");
-            exit(0); //chama devolta a funcao
-        }
+            exit(0); //se falar encerra o programa
+        }   //percorre a lista de armamentos e vai escrevendo no arquivo Estoque.txt todos os armamentos
         for (armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
             resultado = fprintf(arquivo,"ID -> %d; Nome -> %s; Tipo -> %s; Custo -> %.2f PO; Dano -> %.2f; Unidades em estoque -> %d\n\n",
                                 armamento->getId(), armamento->getNome().c_str(), armamento->getTipo().c_str(), 
@@ -623,6 +622,7 @@ class Vendas:public Estoque, public LogVendas{
 private:
     int idVenda;
 public:
+    Vendas(){}
 
     void menuVendas(){
         int escolhaMenuVendas;
@@ -853,7 +853,7 @@ public:
     void exportarLogVendas(){
         int resultadoLog;
         FILE *arquivoLog;
-        arquivoLog = fopen("LogVendas.txt", "wt"); //w, r, a, 
+        arquivoLog = fopen("LogVendas.txt", "a"); //w, r, a, 
         if (arquivoLog == NULL) // Se nao conseguiu criar
         {
             printf("Falha ao criar arquivo!\n");
