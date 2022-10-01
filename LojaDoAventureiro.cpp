@@ -74,6 +74,16 @@ public:
         system("clear||cls");
         std::cout << "Armamento criado com sucesso!\n\n";
     }
+
+    Armamentos(std::string nome, std::string tipo, float custo, float dano, int qtdEstoque){
+        this->setId(idAtual++);
+        this->setNome(nome);
+        this->setTipo(tipo);
+        this->setCusto(custo);
+        this->setDano(dano);
+        this->setQtdEstoque(qtdEstoque);
+    }
+
 };
 
 std::vector <Armamentos> listaArmamentos;
@@ -97,8 +107,17 @@ public:
         this->setCusto(custo);
         this->setDurabilidade(durabilidade);
         this->setQtdEstoque(0);
-        // system("clear||cls");
+        system("clear||cls");
         std::cout << "Armadura criada com sucesso!\n\n";
+    }
+
+    Armaduras(std::string nome, std::string tipo, float custo, float durabilidade, int qtdEstoque){
+        this->setId(idAtual++);
+        this->setNome(nome);
+        this->setTipo(tipo);
+        this->setCusto(custo);
+        this->setDurabilidade(durabilidade);
+        this->setQtdEstoque(qtdEstoque);
     }
 };
 
@@ -123,8 +142,17 @@ public:
         this->setCusto(custo);
         this->setUsos(usos);
         this->setQtdEstoque(0);
-        // system("clear||cls");
+        system("clear||cls");
         std::cout << "Consumivel criado com sucesso!\n\n";
+    }
+
+    Consumiveis(std::string nome, std::string tipo, float custo, int usos, int qtdEstoque){
+        this->setId(idAtual++);
+        this->setNome(nome);
+        this->setTipo(tipo);
+        this->setCusto(custo);
+        this->setUsos(usos);
+        this->setQtdEstoque(qtdEstoque);
     }
 };
 
@@ -274,11 +302,11 @@ public:
                 std::cout << "Cadastrar armadura:\n";
                 std::cout << "Digite o nome:";
                 std::cin >> nome;
-                std::cout << "\nDigite o tipo:";
+                std::cout << "Digite o tipo:";
                 std::cin >> tipo;
-                std::cout << "\nDigite o custo:";
+                std::cout << "Digite o custo:";
                 std::cin >> custo;
-                std::cout << "\nDigite a durabilidade:";
+                std::cout << "Digite a durabilidade:";
                 std::cin >> durabilidade;
 
                 listaArmaduras.push_back(Armaduras(nome, tipo, custo, durabilidade));
@@ -287,15 +315,14 @@ public:
 
             case 3:
                 // system("clear||cls");
-                std::cout << "Cadastrar consumivel:";
-
-                std::cout << "\nDigite o nome:";
+                std::cout << "Cadastrar consumivel:\n";
+                std::cout << "Digite o nome:";
                 std::cin >> nome;
-                std::cout << "\nDigite o tipo:";
+                std::cout << "Digite o tipo:";
                 std::cin >> tipo;
-                std::cout << "\nDigite o custo:";
+                std::cout << "Digite o custo:";
                 std::cin >> custo;
-                std::cout << "\nDigite a quantidade de usos:";
+                std::cout << "Digite a quantidade de usos:";
                 std::cin >> usos;
 
                 listaConsumiveis.push_back(Consumiveis(nome, tipo, custo, usos));
@@ -344,7 +371,7 @@ public:
                 break;
 
             default:
-                std::cout << "Escolha inválida!";
+                std::cout << "Escolha invalida!";
                 break;
             }
         } while(escolhaRemoveItem != 0);
@@ -926,6 +953,9 @@ public:
 int main(){
     setlocale(LC_ALL, "Portuguese");
     Menu menu;
+    listaArmamentos.push_back(Armamentos("Espada", "Fogo", 90, 70, 10));
+    listaArmaduras.push_back(Armaduras("Esqueleto", "Osso", 80, 100, 3));
+    listaConsumiveis.push_back(Consumiveis("Cogumelo", "Verde", 10, 1, 100));
     menu.menuPrincipal();
    
     return 0;
