@@ -16,7 +16,7 @@ private:
     float custo;
     
 public:
-    int getId(){
+    int& getId(){
         return id;
     }
 
@@ -65,7 +65,7 @@ public:
     }
 
     Armamentos(std::string nome, std::string tipo, float custo, float dano){
-        this->setId(++idAtual);
+        this->setId(idAtual++);
         this->setNome(nome);
         this->setTipo(tipo);
         this->setCusto(custo);
@@ -91,7 +91,7 @@ public:
     }
 
     Armaduras(std::string nome, std::string tipo, float custo, float durabilidade){
-        this->setId(++idAtual);
+        this->setId(idAtual++);
         this->setNome(nome);
         this->setTipo(tipo);
         this->setCusto(custo);
@@ -117,7 +117,7 @@ public:
     }
 
     Consumiveis(std::string nome, std::string tipo, float custo, int usos){
-        this->setId(++idAtual);
+        this->setId(idAtual++);
         this->setNome(nome);
         this->setTipo(tipo);
         this->setCusto(custo);
@@ -195,7 +195,17 @@ public:
         this->custoFinal = custoFinal;
     }
 
-    LogVendas(){}
+    void chamaLogVendas(){
+        std::cout << "\nLogs de vendas: " << '\n';
+        for(logVenda = listaLogVendas.begin(); logVenda != listaLogVendas.end(); logVenda++){
+            std::cout << "ID da venda: " << logVenda->getIdVenda() << '\n';
+            std::cout << "ID do item vendido: " << logVenda->getIdItem() << '\n';
+            std::cout << "Quantidade de itens vendidos: " << logVenda->getQtdItens() << '\n';
+            std::cout << "Nome do item vendido: " << logVenda->getNomeItem() << " PO\n";
+            std::cout << "Valor sem desconto: " << logVenda->getCustoInicial() << '\n';
+            std::cout << "Valor com desconto: " << logVenda->getCustoFinal() << '\n\n';
+        }
+    }
 };
 
 std::vector <LogVendas> listaLogVendas;
@@ -322,15 +332,15 @@ public:
             switch (escolhaRemoveItem)
             {
             case 1:
-                removeArmamento();
+                if(removeArmamento())
                 break;
 
             case 2:
-                removeArmadura();
+                if(removeArmadura())
                 break;
 
             case 3:
-                removeConsumivel();
+                if(removeConsumivel())
                 break;
 
             case 0:
@@ -342,49 +352,42 @@ public:
             }
         } while(escolhaRemoveItem != 0);
     }
-    
-    bool pesquisarArmamento(int idEscolhido){
-        for(armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
-            if (armamento->getId() == idEscolhido){
-                return true;
-            }
-            else{
-                std::cout << "ID não encontrado!\n";
-                return false;
-            }
-        }
-        return false;
-    }
 
-    void removeArmamento(){
+    bool removeArmamento(){
         int idEscolhido;
         listarArmamentos();
         std::cout << "Escolha o ID do armamento que deseja remover: ";
         std::cin >> idEscolhido;
 
-        if(pesquisarArmamento(idEscolhido)){
-            listaArmamentos.erase(armamento);
-            std::cout << "Armamento removido com sucesso!\n";
-        } else{
-            removeArmamento();
+        for(armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
+            if (armamento->getId() == idEscolhido){
+                listaArmamentos.erase(armamento);
+                std::cout << "Armadura removida com sucesso!\n";
+                return true;
+            }
         }
+        std::cout << "ID nao encontrado!";
+        return false;
     }
 
-    void removeArmadura(){
+    bool removeArmadura(){
         int idEscolhido;
         listarArmaduras();
         std::cout << "Escolha o ID da armadura que deseja remover: ";
         std::cin >> idEscolhido;
 
-        if(pesquisarArmamento(idEscolhido)){
-            listaArmaduras.erase(armadura);
-            std::cout << "Armadura removida com sucesso!\n";
-        } else {
-            removeArmadura();
+        for(armadura = listaArmaduras.begin(); armadura != listaArmaduras.end(); armadura++){
+            if (consumivel->getId() == idEscolhido){
+                listaArmaduras.erase(armadura);
+                std::cout << "Armadura removida com sucesso!\n";
+                return true;
+            }
         }
+        std::cout << "ID nao encontrado!";
+        return false;
     }
 
-    void removeConsumivel(){
+    bool removeConsumivel(){
         int idEscolhido;
         listarConsumiveis();
         std::cout << "Escolha o ID do consumivel que deseja remover: ";
@@ -394,12 +397,11 @@ public:
             if (consumivel->getId() == idEscolhido){
                 listaConsumiveis.erase(consumivel);
                 std::cout << "Consumivel removido com sucesso!\n";
-            }
-            else{
-                std::cout << "ID não encontrado!\n";
-                removeArmadura();
+                return true;
             }
         }
+        std::cout << "ID nao encontrado!";
+        return false;
     }
 
     void adicionarUnidade(){
@@ -412,18 +414,15 @@ public:
             switch (escolhaAdicionaItem)
             {
             case 1:
-                adicionaArmamento();
-                escolhaAdicionaItem = 0;
+                if(adicionaArmamento);
                 break;
 
             case 2:
-                adicionaArmadura();
-                escolhaAdicionaItem = 0;
+                if(adicionaArmadura);
                 break;
 
             case 3:
-                adicionaConsumivel();
-                escolhaAdicionaItem = 0;
+                if(adicionaConsumivel);
                 break;
 
             case 0:
@@ -436,7 +435,7 @@ public:
         } while(escolhaAdicionaItem != 0);
     }
 
-    void adicionaArmamento(){
+    bool adicionaArmamento(){
         int idEscolhido, unidades;
         listarArmamentos();
         std::cout << "Escolha o ID do armamento para adicionar unidades:\n";
@@ -448,14 +447,14 @@ public:
                 std::cin >> unidades;
                 armamento->setQtdEstoque(armamento->getQtdEstoque() + unidades);
                 std::cout << unidades << " unidades adicionadas com sucesso!\n";
-            } else {
-                std::cout << "ID não encontrado!\n";
-                adicionaArmamento();
+                return true;
             }
         }
+        std::cout << "ID nao encontrado!";
+        return false;
     }
 
-    void adicionaArmadura(){
+    bool adicionaArmadura(){
         int idEscolhido, unidades;
         listarArmaduras();
         std::cout << "Escolha o ID da armadura para adicionar unidades:\n";
@@ -467,15 +466,14 @@ public:
                 std::cin >> unidades;
                 armadura->setQtdEstoque(armadura->getQtdEstoque() + unidades);
                 std::cout << unidades << " unidades adicionadas com sucesso!\n";
-            }
-            else{
-                std::cout << "ID não encontrado!\n";
-                adicionaArmadura();
+                return true;
             }
         }
+        std::cout << "ID nao encontrado!";
+        return false;
     }
 
-    void adicionaConsumivel(){
+    bool adicionaConsumivel(){
         int idEscolhido, unidades;
         listarConsumiveis();
         std::cout << "Escolha o ID do consumivel para adicionar unidades:\n";
@@ -487,58 +485,54 @@ public:
                 std::cin >> unidades;
                 consumivel->setQtdEstoque(consumivel->getQtdEstoque() + unidades);
                 std::cout << unidades << " unidades adicionadas com sucesso!\n";
-            }
-            else{
-                std::cout << "ID não encontrado!\n";
-                adicionaConsumivel();
+                return true;
             }
         }
+        std::cout << "ID nao encontrado!";
+        return false;
     }
 
-    void vendeConsumivel(int id, int unidades){
-        consumivel[id].setQtdEstoque(consumivel[id].getQtdEstoque() - unidades);
-        std::cout << unidades << " unidades vendidas com sucesso!\n";
-    }
+    
 
     void listarArmamentos(){
-        std::cout << "\nLista de armamentos: " << "\n";
+        std::cout << "\nLista de armamentos: " << '\n';
         for(armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
-            std::cout << "ID: " << armamento->getId() << "\n";
-            std::cout << "Nome: " << armamento->getNome() << "\n";
-            std::cout << "Tipo: " << armamento->getTipo() << "\n";
+            std::cout << "ID: " << armamento->getId() << '\n';
+            std::cout << "Nome: " << armamento->getNome() << '\n';
+            std::cout << "Tipo: " << armamento->getTipo() << '\n';
             std::cout << "Custo: " << armamento->getCusto() << " PO\n";
-            std::cout << "Dano: " << armamento->getDano() << "\n";
-            std::cout << "Unidades em estoque: " << armamento->getQtdEstoque() << "\n\n";
+            std::cout << "Dano: " << armamento->getDano() << '\n';
+            std::cout << "Unidades em estoque: " << armamento->getQtdEstoque() << '\n\n';
         }
     }
 
     void listarArmaduras(){
-        std::cout << "\nLista de armaduras: " << "\n";
+        std::cout << "\nLista de armaduras: " << '\n';
         for(armadura = listaArmaduras.begin(); armadura != listaArmaduras.end(); armadura++){
-            std::cout << "ID: " << armadura->getId() << "\n";
-            std::cout << "Nome: " << armadura->getNome() << "\n";
-            std::cout << "Tipo: " << armadura->getTipo() << "\n";
+            std::cout << "ID: " << armadura->getId() << '\n';
+            std::cout << "Nome: " << armadura->getNome() << '\n';
+            std::cout << "Tipo: " << armadura->getTipo() << '\n';
             std::cout << "Custo: " << armadura->getCusto() << " PO\n";
-            std::cout << "Durabilidade: " << armadura->getDurabilidade() << "\n";
-            std::cout << "Unidades em estoque: " << armadura->getQtdEstoque() << "\n\n";
+            std::cout << "Durabilidade: " << armadura->getDurabilidade() << '\n';
+            std::cout << "Unidades em estoque: " << armadura->getQtdEstoque() << '\n\n';
         }
     }
 
     void listarConsumiveis(){
-        std::cout << "\nLista de consumiveis: " << "\n";
+        std::cout << "\nLista de consumiveis: " << '\n';
         for(consumivel = listaConsumiveis.begin(); consumivel != listaConsumiveis.end(); consumivel++){
-            std::cout << "ID: " << consumivel->getId() << "\n";
-            std::cout << "Nome: " << consumivel->getNome() << "\n";
-            std::cout << "Tipo: " << consumivel->getTipo() << "\n";
+            std::cout << "ID: " << consumivel->getId() << '\n';
+            std::cout << "Nome: " << consumivel->getNome() << '\n';
+            std::cout << "Tipo: " << consumivel->getTipo() << '\n';
             std::cout << "Custo: " << consumivel->getCusto() << " PO\n";
-            std::cout << "Usos: " << consumivel->getUsos() << "\n";
-            std::cout << "Unidades em estoque: " << consumivel->getQtdEstoque() << "\n\n";
+            std::cout << "Usos: " << consumivel->getUsos() << '\n';
+            std::cout << "Unidades em estoque: " << consumivel->getQtdEstoque() << '\n\n';
         }
     }
 
     void listarEstoque(){   
         // system("clear||cls");
-        std::cout << "Lista de itens:" << "\n";
+        std::cout << "Lista de itens:\n";
         listarArmaduras();
         listarArmamentos();
         listarConsumiveis();
@@ -640,7 +634,7 @@ public:
                 break;
 
             case 2:
-                // logVendas();
+                chamaLogVendas();
                 break;
 
             case 3:
@@ -657,8 +651,6 @@ public:
         } while(escolhaMenuVendas);
     }
 
-
-
     void venderItens(){
         int escolhaVendaItem = -1;
         do{
@@ -668,15 +660,15 @@ public:
             switch (escolhaVendaItem)
             {
             case 1:
-                venderArmamentos();
+                if(venderArmamentos);
                 break;
 
             case 2:
-                venderArmaduras();
+                if(venderArmaduras);
                 break;
 
             case 3:
-                venderConsumiveis();
+                if(venderConsumiveis);
                 break;
 
             case 0:
@@ -689,7 +681,7 @@ public:
         } while(escolhaVendaItem != 0);
     }
 
-    void venderArmamentos(){
+    bool venderArmamentos(){
         int idEscolhido, unidades, desconto;
         float valorUnitario;
         listarArmamentos();
@@ -713,8 +705,10 @@ public:
                             listaLogVendas.push_back(LogVendas(idEscolhido, unidades, armamento->getNome(), unidades * valorUnitario, (1 - (desconto * valorUnitario * 0.0001)) * valorUnitario));
                             if(unidades == 1){
                                 std::cout <<"Uma unidade vendida com sucesso!\n";
+                                return true;
                             }else{
                                 std::cout << unidades << " unidades vendidas com sucesso!\n";
+                                return true;
                             }
                             escolhe = 0;
                             break;
@@ -731,16 +725,12 @@ public:
                         std::cout << "Só tem " << armamento->getQtdEstoque() << " deste item no estoque! Escolha outra quantia!\n";
                     }
                 } while (escolhe != 0);
-
-            }
-            else{
-                std::cout << "ID não encontrado!\n";
-                venderArmamentos();
             }
         }
+        return false;
     }
 
-    void venderArmaduras(){
+    bool venderArmaduras(){
         int idEscolhido, unidades, desconto;
         float valorUnitario;
         listarArmaduras();
@@ -764,8 +754,10 @@ public:
                             listaLogVendas.push_back(LogVendas(idEscolhido, unidades, armadura->getNome(), unidades * valorUnitario, (1 - (desconto * valorUnitario * 0.0001)) * valorUnitario));
                             if(unidades == 1){
                                 std::cout <<"Uma unidade vendida com sucesso!\n";
+                                return true;
                             }else{
                                 std::cout << unidades << " unidades vendidas com sucesso!\n";
+                                return true;
                             }
                             escolhe = 0;
                             break;
@@ -781,16 +773,12 @@ public:
                         std::cout << "Só tem " << armadura->getQtdEstoque() << " deste item no estoque! Escolha outra quantia!\n";
                     }
                 } while (escolhe != 0);
-
-            }
-            else{
-                std::cout << "ID não encontrado!\n";
-                venderArmaduras();
             }
         }
+        return false;
     }
 
-    void venderConsumiveis(){
+    bool venderConsumiveis(){
         int idEscolhido, unidades, desconto;
         float valorUnitario;
         listarConsumiveis();
@@ -814,8 +802,10 @@ public:
                             listaLogVendas.push_back(LogVendas(idEscolhido, unidades, consumivel->getNome(), unidades * valorUnitario, (1 - (desconto * valorUnitario * 0.0001)) * valorUnitario));
                             if(unidades == 1){
                                 std::cout <<"Uma unidade vendida com sucesso!\n";
+                                return true;
                             }else{
                                 std::cout << unidades << " unidades vendidas com sucesso!\n";
+                                return true;
                             }
                             escolhe = 0;
                             break;
@@ -832,11 +822,9 @@ public:
                         std::cout << "Só tem " << consumivel->getQtdEstoque() << " deste item no estoque! Escolha outra quantia!\n";
                     }
                 } while (escolhe != 0);
-            }else{
-                std::cout << "ID não encontrado!\n";
-                venderConsumiveis();
             }
         }
+        return false;
     }
 
     bool ehPrimo(int numero){
