@@ -197,17 +197,6 @@ public:
         this->custoFinal = custoFinal;
     }
 
-    void chamaLogVendas(){   //lista todos os log de vendas ja feitos
-        std::cout << "\nLogs de vendas: " << '\n';
-        for(logVenda = listaLogVendas.begin(); logVenda != listaLogVendas.end(); logVenda++){
-            std::cout << "ID da venda: " << logVenda->getIdVenda() << '\n';
-            std::cout << "ID do item vendido: " << logVenda->getIdItem() << '\n';
-            std::cout << "Quantidade de itens vendidos: " << logVenda->getQtdItens() << '\n';
-            std::cout << "Nome do item vendido: " << logVenda->getNomeItem() << " PO\n";
-            std::cout << "Valor sem desconto: " << logVenda->getCustoInicial() << '\n';
-            std::cout << "Valor com desconto: " << logVenda->getCustoFinal() << '\n\n';
-        }
-    }
 };
 
 std::vector <LogVendas> listaLogVendas;
@@ -415,15 +404,15 @@ public:
             switch (escolhaAdicionaItem)
             {
             case 1:
-                if(adicionaArmamento);
+                if(adicionaArmamento())
                 break;
 
             case 2:
-                if(adicionaArmadura);
+                if(adicionaArmadura())
                 break;
 
             case 3:
-                if(adicionaConsumivel);
+                if(adicionaConsumivel())
                 break;
 
             case 0:
@@ -501,7 +490,7 @@ public:
             std::cout << "Tipo: " << armamento->getTipo() << '\n';
             std::cout << "Custo: " << armamento->getCusto() << " PO\n";
             std::cout << "Dano: " << armamento->getDano() << '\n';
-            std::cout << "Unidades em estoque: " << armamento->getQtdEstoque() << '\n\n';
+            std::cout << "Unidades em estoque: " << armamento->getQtdEstoque() << "\n\n";
         }
     }
 
@@ -513,7 +502,7 @@ public:
             std::cout << "Tipo: " << armadura->getTipo() << '\n';
             std::cout << "Custo: " << armadura->getCusto() << " PO\n";
             std::cout << "Durabilidade: " << armadura->getDurabilidade() << '\n';
-            std::cout << "Unidades em estoque: " << armadura->getQtdEstoque() << '\n\n';
+            std::cout << "Unidades em estoque: " << armadura->getQtdEstoque() << "\n\n";
         }
     }
 
@@ -525,7 +514,7 @@ public:
             std::cout << "Tipo: " << consumivel->getTipo() << '\n';
             std::cout << "Custo: " << consumivel->getCusto() << " PO\n";
             std::cout << "Usos: " << consumivel->getUsos() << '\n';
-            std::cout << "Unidades em estoque: " << consumivel->getQtdEstoque() << '\n\n';
+            std::cout << "Unidades em estoque: " << consumivel->getQtdEstoque() << "\n\n";
         }
     }
 
@@ -660,15 +649,15 @@ public:
             switch (escolhaVendaItem)
             {
             case 1:
-                if(venderArmamentos);
+                if(venderArmamentos())
                 break;
 
             case 2:
-                if(venderArmaduras);
+                if(venderArmaduras())
                 break;
 
             case 3:
-                if(venderConsumiveis);
+                if(venderConsumiveis())
                 break;
 
             case 0:
@@ -848,6 +837,18 @@ public:
             }
         }
         return cont;
+    }
+
+    void chamaLogVendas(){   //lista todos os log de vendas ja feitos
+        std::cout << "\nLogs de vendas: " << '\n';
+        for(logVenda = listaLogVendas.begin(); logVenda != listaLogVendas.end(); logVenda++){
+            std::cout << "ID da venda: " << logVenda->getIdVenda() << '\n';
+            std::cout << "ID do item vendido: " << logVenda->getIdItem() << '\n';
+            std::cout << "Quantidade de itens vendidos: " << logVenda->getQtdItens() << '\n';
+            std::cout << "Nome do item vendido: " << logVenda->getNomeItem() << " PO\n";
+            std::cout << "Valor sem desconto: " << logVenda->getCustoInicial() << '\n';
+            std::cout << "Valor com desconto: " << logVenda->getCustoFinal() << "\n\n";
+        }
     }
 
     void exportarLogVendas(){
