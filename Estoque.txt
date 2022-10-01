@@ -1,0 +1,2 @@
+ID -> 0; Nome -> Espada; Tipo -> Fogo; Custo -> 90,00 PO; Dano -> 60,00; Unidades em estoque -> 0
+

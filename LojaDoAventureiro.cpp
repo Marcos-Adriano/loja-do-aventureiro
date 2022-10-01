@@ -323,15 +323,21 @@ public:
             switch (escolhaRemoveItem)
             {
             case 1:
-                if(removeArmamento())
+                if(removeArmamento()){
+                    escolhaRemoveItem = 0;
+                }
                 break;
 
             case 2:
-                if(removeArmadura())
+                if(removeArmadura()){
+                    escolhaRemoveItem = 0;
+                }
                 break;
 
             case 3:
-                if(removeConsumivel())
+                if(removeConsumivel()){
+                    escolhaRemoveItem = 0;
+                }
                 break;
 
             case 0:
@@ -404,15 +410,21 @@ public:
             switch (escolhaAdicionaItem)
             {
             case 1:
-                if(adicionaArmamento())
+                if(adicionaArmamento()){
+                    escolhaAdicionaItem = 0;
+                }
                 break;
 
             case 2:
-                if(adicionaArmadura())
+                if(adicionaArmadura()){
+                    escolhaAdicionaItem = 0;
+                }
                 break;
 
             case 3:
-                if(adicionaConsumivel())
+                if(adicionaConsumivel()){
+                    escolhaAdicionaItem = 0;
+                }
                 break;
 
             case 0:
@@ -786,7 +798,7 @@ public:
                         std::cout << "Tela de confirmacao:\nCusto da unidade: " << valorUnitario << " PO\nValor sem desconto: " << unidades * valorUnitario << " PO\nDesconto: " << desconto << "%\nDesconto total: " << desconto * valorUnitario * 0.01 <<" PO\nValor com desconto: " << 1 - desconto * valorUnitario * 0.0001 << " PO\nTem certeza que dejesa prosseguir?\n1 - Sim\n2 - Nao\n";
                         std::cin >> prossegue;
                         switch (prossegue){
-                        case 1:
+                        case 1:  //SIM
                             consumivel->setQtdEstoque(consumivel->getQtdEstoque() - unidades); //VENDIDO AQUI!!
                             listaLogVendas.push_back(LogVendas(idEscolhido, unidades, consumivel->getNome(), unidades * valorUnitario, (1 - (desconto * valorUnitario * 0.0001)) * valorUnitario));
                             if(unidades == 1){
@@ -799,7 +811,7 @@ public:
                             escolhe = 0;
                             break;
 
-                        case 2:
+                        case 2:  //NAO
                             escolhe = 0;
                             break;
 
