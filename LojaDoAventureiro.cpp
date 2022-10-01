@@ -650,7 +650,7 @@ public:
                 std::cout << "Opcao invalida!";
                 break;
             }
-        } while(escolhaMenuVendas);
+        } while(escolhaMenuVendas != 0);
     }
 
     void venderItens(){
@@ -662,15 +662,21 @@ public:
             switch (escolhaVendaItem)
             {
             case 1:
-                if(venderArmamentos())
+                if(venderArmamentos()){
+                    escolhaVendaItem = 0;
+                }
                 break;
 
             case 2:
-                if(venderArmaduras())
+                if(venderArmaduras()){
+                    escolhaVendaItem = 0;
+                }
                 break;
 
             case 3:
-                if(venderConsumiveis())
+                if(venderConsumiveis()){
+                    escolhaVendaItem = 0;
+                }
                 break;
 
             case 0:
