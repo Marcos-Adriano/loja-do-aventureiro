@@ -641,7 +641,13 @@ public:
     }
 
     void importarEstoque(){
+        FILE * arquivo;
+        arquivo = fopen("Estoque.txt" , "r");
+        if(arquivo == NULL){
+            std::cout << "Arquivo Estoque.txt nao encontrado!";
+        }
 
+        fclose(arquivo);
     }
 
 };
