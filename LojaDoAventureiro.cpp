@@ -659,30 +659,30 @@ public:
     Vendas(){}
 
     void menuVendas(){
-        int escolhaMenuVendas;
+        int escolhaMenuVendas = -1;
         do{
             std::cout << "MENU DE VENDAS \nEscolha uma opcao:\n1 - Venda de itens\n2 - Log de vendas\n3 - Exportacao de log de vendas\n0 - Voltar ao menu anterior\n";
-            switch (escolhaMenuVendas){
             std::cin >> escolhaMenuVendas;
-            case 1:
-                venderItens();
-                break;
+            switch (escolhaMenuVendas){ 
+                case 1:
+                    venderItens();
+                    break;
 
-            case 2:
-                chamaLogVendas();
-                break;
+                case 2:
+                    chamaLogVendas();
+                    break;
 
-            case 3:
-                exportarLogVendas();
-                break;
+                case 3:
+                    exportarLogVendas();
+                    break;
 
-            case 0:
-                break;
-            
-            default:
-                std::cout << "Opcao invalida!";
-                break;
-            }
+                case 0:
+                    break;
+                
+                default:
+                    std::cout << "Opcao invalida!";
+                    break;
+                }
         } while(escolhaMenuVendas != 0);
     }
 
@@ -934,7 +934,7 @@ public:
         Vendas vendas;
         do {
             std::cout << "********************\n** MENU PRINCIPAL **\n********************\n1 - Menu de estoque\n2 - Menu de vendas\n0 - Sair\nEscolha:";
-            std::cin>>escolha;
+            std::cin >> escolha;
             switch (escolha) { 
                 case 1:
                     estoque.menuEstoque();
@@ -958,11 +958,11 @@ public:
 
 int main(){
     setlocale(LC_ALL, "Portuguese");
-    Menu menu;
-    listaArmamentos.push_back(Armamentos("Espada", "Fogo", 80, 7, 10));
-    listaArmaduras.push_back(Armaduras("Peitoral", "Osso", 90, 100, 3));
-    listaConsumiveis.push_back(Consumiveis("Cogumelo", "Verde", 10, 1, 100));
-    menu.menuPrincipal();
+    Menu menu;                            //nome          tipo      custo
+    listaArmamentos.push_back(Armamentos(  "Espada",     "Fogo",    80,       7,  10)); //dano
+    listaArmaduras.push_back(Armaduras(    "Peitoral",   "Osso",    90,      100,  3));//durabilidade
+    listaConsumiveis.push_back(Consumiveis("Cogumelo",   "Verde",   10,       1,  100)); //usos
+    menu.menuPrincipal();                                                 //qtd em ^estoque
    
     return 0;
 }
