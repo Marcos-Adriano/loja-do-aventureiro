@@ -630,6 +630,7 @@ public:
         do{
             std::cout << "MENU DE VENDAS \nEscolha uma opcao:\n1 - Venda de itens\n2 - Log de vendas\n3 - Exportacao de log de vendas\n0 - Voltar ao menu anterior\n";
             switch (escolhaMenuVendas){
+            std::cin >> escolhaMenuVendas;
             case 1:
                 venderItens();
                 break;
