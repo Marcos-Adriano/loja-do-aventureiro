@@ -71,7 +71,7 @@ public:
         this->setCusto(custo);
         this->setDano(dano);
         this->setQtdEstoque(0);
-        // system("clear||cls");
+        system("clear||cls");
         std::cout << "Armamento criado com sucesso!\n\n";
     }
 };
