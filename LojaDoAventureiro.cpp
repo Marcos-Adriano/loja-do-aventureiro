@@ -578,7 +578,7 @@ public:
         // arquivo.open("Estoque.txt", std::ios::app);// cria um arquivo chamado Estoque.txt ou adiciona 
         std::ofstream arquivo("Estoque.txt", std::ios::app);
         if (!arquivo.is_open()){
-            std::cout << "Arquivo não encontrado.\n";
+            std::cout << "Arquivo nao encontrado.\n";
         }else{
                //percorre a lista de armamentos e vai escrevendo no arquivo Estoque.txt todos os armamentos
             for (armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
@@ -589,7 +589,6 @@ public:
                 arquivo << "; Dano -> " << armamento->getDano();
                 arquivo << "; Quantidades em estoque -> " <<armamento->getQtdEstoque() << "\n\n";
             }
-            arquivo.close();
         }
         arquivo.close();
     }
@@ -597,7 +596,7 @@ public:
     void exportarArmaduras(){
         std::ofstream arquivo("Estoque.txt", std::ios::app);
         if (!arquivo.is_open()){
-            std::cout << "Arquivo não encontrado.\n";
+            std::cout << "Arquivo nao encontrado.\n";
         }else{
             for (armadura = listaArmaduras.begin(); armadura != listaArmaduras.end(); armadura++){
                 arquivo << "ID -> " << armadura->getId();
@@ -614,7 +613,7 @@ public:
     void exportarConsumiveis(){
         std::ofstream arquivo("Estoque.txt", std::ios::app);
         if (!arquivo.is_open()){
-            std::cout << "Arquivo não encontrado.\n";
+            std::cout << "Arquivo nao encontrado.\n";
         }else{
             for (consumivel = listaConsumiveis.begin(); consumivel != listaConsumiveis.end(); consumivel++){
                 arquivo << "ID -> " << consumivel->getId();
@@ -892,27 +891,29 @@ public:
     }
 
     void exportarLogVendas(){
-        
-        FILE *arquivoLog;
-        arquivoLog = fopen("LogVendas.txt", "a"); //w, r, a, 
-        if (arquivoLog == NULL) // Se nao conseguiu criar
-        {
-            printf("Falha ao criar arquivo!\n");
-            exit(0); //chama devolta a funcao
+        std::ofstream arquivo("LogVendas.txt", std::ios::app);
+        if (!arquivo.is_open()){
+            std::cout << "Arquivo nao encontrado.\n";
+        }else{
+            for (logVenda = listaLogVendas.begin(); logVenda != listaLogVendas.end(); logVenda++){
+                arquivo << "ID da venda ->" << logVenda->getIdVenda();
+                arquivo << "ID do item vendido ->" << logVenda->getIdItem();
+                arquivo << "Nome do item vendido ->" << logVenda->getNomeItem();
+                arquivo << "Quantidade de itens vendidos ->" << logVenda->getQtdItens();
+                arquivo << "Valor sem desconto ->" << logVenda->getCustoInicial();
+                arquivo << "Valor com desconto ->" << logVenda->getCustoFinal(); 
+            }
         }
-        for (logVenda = listaLogVendas.begin(); logVenda != listaLogVendas.end(); logVenda++){
-            int resultadoLog = fprintf(arquivoLog,"ID da venda -> %d;ID do item -> %d;  Nome do item -> %s; Quantidade de itens vendidos -> %d; Valor sem desconto -> %.2f PO; Valor com desconto -> %.2f PO\n\n",
-                                logVenda->getIdVenda(), logVenda->getIdItem(), logVenda->getNomeItem().c_str(), 
-                                logVenda->getQtdItens(), logVenda->getCustoInicial(), logVenda->getCustoFinal()
-                                );
-            if (resultadoLog == EOF)		    
-                printf("Erro na Gravacao\n");
-                fclose(arquivoLog);
-                break;
-        }
-        fclose(arquivoLog);
+        arquivo.close();
     }
-};
+    void exportarConsumiveis(){
+            for (consumivel = listaConsumiveis.begin(); consumivel != listaConsumiveis.end(); consumivel++){
+                arquivo << "ID -> " << consumivel->getId();
+                arquivo << "; Nome -> " << consumivel->getNome();
+                arquivo << "; Tipo -> " << consumivel->getTipo();
+                arquivo << "; Custo -> " << consumivel->getCusto() << " PO";
+                arquivo << "; Usos -> " << consumivel->getUsos();
+                arquivo << "; Quantidades em estoque -> " << consumivel->getQtdEstoque() << "\n\n";}}};
 
 class Menu: public Vendas{
 public:
