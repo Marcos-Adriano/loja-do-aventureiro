@@ -585,82 +585,47 @@ public:
                 arquivo << "ID -> " << armamento->getId();
                 arquivo << "; Nome -> " << armamento->getNome();
                 arquivo << "; Tipo -> " << armamento->getTipo();
-                arquivo << "; Custo -> " << armamento->getCusto() << " PO\n";
+                arquivo << "; Custo -> " << armamento->getCusto() << " PO";
                 arquivo << "; Dano -> " << armamento->getDano();
                 arquivo << "; Quantidades em estoque -> " <<armamento->getQtdEstoque() << "\n\n";
-				arquivo.close();	                  
+            }
+            arquivo.close();
+        }
+        arquivo.close();
+    }
+
+    void exportarArmaduras(){
+        std::ofstream arquivo("Estoque.txt", std::ios::app);
+        if (!arquivo.is_open()){
+            std::cout << "Arquivo não encontrado.\n";
+        }else{
+            for (armadura = listaArmaduras.begin(); armadura != listaArmaduras.end(); armadura++){
+                arquivo << "ID -> " << armadura->getId();
+                arquivo << "; Nome -> " << armadura->getNome();
+                arquivo << "; Tipo -> " << armadura->getTipo();
+                arquivo << "; Custo -> " << armadura->getCusto() << " PO";
+                arquivo << "; Durabilidade -> " << armadura->getDurabilidade();
+                arquivo << "; Quantidades em estoque -> " << armadura->getQtdEstoque() << "\n\n";
             }
         }
         arquivo.close();
     }
 
-    // void exportarArmamentos(){
-    //     int resultado;
-    //     FILE *arquivo;
-    //     arquivo = fopen("Estoque.txt", "a");// cria um arquivo chamado Estoque.txt
-    //     if (arquivo == NULL) // Se nao conseguiu criar
-    //     {
-    //         printf("Falha ao criar arquivo!\n");
-    //         exit(0); //se falar encerra o programa
-    //     }   //percorre a lista de armamentos e vai escrevendo no arquivo Estoque.txt todos os armamentos
-    //     for (armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
-    //         std::cout << armamento->getId();
-    //         resultado = fprintf(arquivo,"ID -> %d; Nome -> %s; Tipo -> %s; Custo -> %.2f PO; Dano -> %.2f; Unidades em estoque -> %d\n\n",
-    //                             armamento->getId(), armamento->getNome().c_str(), armamento->getTipo().c_str(), 
-    //                             armamento->getCusto(), armamento->getDano(), armamento->getQtdEstoque()
-    //                             );  					  
-    //         if (resultado == EOF)		    
-    //             printf("Erro na Gravacao\n");
-    //             fclose(arquivo);
-    //             break;
-    //     }
-    //     fclose(arquivo);
-    // }
-
-    void exportarArmaduras(){
-        int resultado;
-        FILE *arquivo;
-        arquivo = fopen("Estoque.txt", "a");
-        if (arquivo == NULL) // Se nao conseguiu criar
-        {
-            printf("Falha ao criar arquivo!\n");
-            exit(0); //chama devolta a funcao
-        }
-        for (armadura = listaArmaduras.begin(); armadura != listaArmaduras.end(); armadura++){
-
-            resultado = fprintf(arquivo,"ID -> %d; Nome-> %s; Tipo -> %s; Custo -> %.2f PO; Durabilidade -> %.2f; Unidades em estoque -> %d\n\n",
-                            armadura->getId(), armadura->getNome().c_str(), armadura->getTipo().c_str(), 
-                            armadura->getCusto(), armadura->getDurabilidade(), armadura->getQtdEstoque()
-                            );  					  
-            if (resultado == EOF)		    
-                printf("Erro na Gravacao\n");
-                fclose(arquivo);
-                break;
-        }
-        fclose(arquivo);
-    }
-
     void exportarConsumiveis(){
-        int resultado;
-        FILE *arquivo;
-        arquivo = fopen("Estoque.txt", "a");
-        if (arquivo == NULL) // Se nao conseguiu criar
-        {
-            printf("Falha ao criar arquivo!\n");
-            exit(0); //chama devolta a funcao
+        std::ofstream arquivo("Estoque.txt", std::ios::app);
+        if (!arquivo.is_open()){
+            std::cout << "Arquivo não encontrado.\n";
+        }else{
+            for (consumivel = listaConsumiveis.begin(); consumivel != listaConsumiveis.end(); consumivel++){
+                arquivo << "ID -> " << consumivel->getId();
+                arquivo << "; Nome -> " << consumivel->getNome();
+                arquivo << "; Tipo -> " << consumivel->getTipo();
+                arquivo << "; Custo -> " << consumivel->getCusto() << " PO";
+                arquivo << "; Usos -> " << consumivel->getUsos();
+                arquivo << "; Quantidades em estoque -> " << consumivel->getQtdEstoque() << "\n\n";
+            }
         }
-        for (consumivel = listaConsumiveis.begin(); consumivel != listaConsumiveis.end(); consumivel++){
-
-            resultado = fprintf(arquivo,"ID -> %d; Nome -> %s; Tipo -> %s; Custo -> %.2f PO; Usos -> %d; Unidades em estoque -> %d\n\n",
-                            consumivel->getId(), consumivel->getNome().c_str(), consumivel->getTipo().c_str(), 
-                            consumivel->getCusto(), consumivel->getUsos(), consumivel->getQtdEstoque()
-                            );  					  
-            if (resultado == EOF)		    
-                printf("Erro na Gravacao\n");
-                fclose(arquivo);
-                break;
-        }
-        fclose(arquivo);
+        arquivo.close();
     }
 
     void importarEstoque(){

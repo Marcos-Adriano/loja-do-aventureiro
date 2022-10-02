@@ -1,6 +1,0 @@
-ID -> 0; Nome -> Espada; Tipo -> Fogo; Custo -> 80; Dano -> 7; Quantidades em estoque -> 10
-
-ID -> 1; Nome-> Peitoral; Tipo -> Osso; Custo -> 90,00 PO; Durabilidade -> 100,00; Unidades em estoque -> 3
-
-ID -> 2; Nome -> Cogumelo; Tipo -> Verde; Custo -> 10,00 PO; Usos -> 1; Unidades em estoque -> 100
-
