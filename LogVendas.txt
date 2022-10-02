@@ -2,3 +2,7 @@ ID da venda -> 0;ID do item -> 0;  Nome do item -> Espada; Quantidade de itens v
 
 ID da venda -> 0;ID do item -> 0;  Nome do item -> Espada; Quantidade de itens vendidos -> 5; Valor sem desconto -> 400,00 PO; Valor com desconto -> 392,00 PO
 
+ID da venda -> 0;ID do item -> 0;  Nome do item -> Espada; Quantidade de itens vendidos -> 10; Valor sem desconto -> 800,00 PO; Valor com desconto -> 720,00 PO
+
+ID da venda -> 0;ID do item -> 1;  Nome do item -> Peitoral; Quantidade de itens vendidos -> 3; Valor sem desconto -> 270,00 PO; Valor com desconto -> 270,00 PO
+

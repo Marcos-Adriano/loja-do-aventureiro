@@ -5,6 +5,7 @@
 #include <atomic>
 #include <stdio.h>
 #include <cmath>
+#include <fstream>
 
 static std::atomic<std::uint32_t> idAtual;
 static std::atomic<std::uint32_t> idAtualVenda;
@@ -20,7 +21,7 @@ public:  //metodos get e set
         return id;
     }
 
-    void setId(const int id){
+    void setId(const int &id){
         this->id = id;
     }
 
@@ -41,7 +42,7 @@ public:  //metodos get e set
     float& getCusto(){
         return custo;
     }
-    void setCusto(const float custo){
+    void setCusto(const float &custo){
         this->custo = custo;
     }
 
@@ -572,28 +573,49 @@ public:
         std::cout << "Exportacao concluida!";
     }
 
-    void exportarArmamentos(){
-        int resultado;
-        FILE *arquivo;
-        arquivo = fopen("Estoque.txt", "a");// cria um arquivo chamado Estoque.txt
-        if (arquivo == NULL) // Se nao conseguiu criar
-        {
-            printf("Falha ao criar arquivo!\n");
-            exit(0); //se falar encerra o programa
-        }   //percorre a lista de armamentos e vai escrevendo no arquivo Estoque.txt todos os armamentos
-        for (armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
-            std::cout << armamento->getId();
-            resultado = fprintf(arquivo,"ID -> %d; Nome -> %s; Tipo -> %s; Custo -> %.2f PO; Dano -> %.2f; Unidades em estoque -> %d\n\n",
-                                armamento->getId(), armamento->getNome().c_str(), armamento->getTipo().c_str(), 
-                                armamento->getCusto(), armamento->getDano(), armamento->getQtdEstoque()
-                                );  					  
-            if (resultado == EOF)		    
-                printf("Erro na Gravacao\n");
-                fclose(arquivo);
-                break;
+    void exportarArmamentos(){    // ainda exportando apenas o primeiro item da lista 
+        // std::ofstream arquivo;
+        // arquivo.open("Estoque.txt", std::ios::app);// cria um arquivo chamado Estoque.txt ou adiciona 
+        std::ofstream arquivo("Estoque.txt", std::ios::app);
+        if (!arquivo.is_open()){
+            std::cout << "Arquivo não encontrado.\n";
+        }else{
+               //percorre a lista de armamentos e vai escrevendo no arquivo Estoque.txt todos os armamentos
+            for (armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
+                arquivo << "ID -> " << armamento->getId();
+                arquivo << "; Nome -> " << armamento->getNome();
+                arquivo << "; Tipo -> " << armamento->getTipo();
+                arquivo << "; Custo -> " << armamento->getCusto() << " PO\n";
+                arquivo << "; Dano -> " << armamento->getDano();
+                arquivo << "; Quantidades em estoque -> " <<armamento->getQtdEstoque() << "\n\n";
+				arquivo.close();	                  
+            }
         }
-        fclose(arquivo);
+        arquivo.close();
     }
+
+    // void exportarArmamentos(){
+    //     int resultado;
+    //     FILE *arquivo;
+    //     arquivo = fopen("Estoque.txt", "a");// cria um arquivo chamado Estoque.txt
+    //     if (arquivo == NULL) // Se nao conseguiu criar
+    //     {
+    //         printf("Falha ao criar arquivo!\n");
+    //         exit(0); //se falar encerra o programa
+    //     }   //percorre a lista de armamentos e vai escrevendo no arquivo Estoque.txt todos os armamentos
+    //     for (armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
+    //         std::cout << armamento->getId();
+    //         resultado = fprintf(arquivo,"ID -> %d; Nome -> %s; Tipo -> %s; Custo -> %.2f PO; Dano -> %.2f; Unidades em estoque -> %d\n\n",
+    //                             armamento->getId(), armamento->getNome().c_str(), armamento->getTipo().c_str(), 
+    //                             armamento->getCusto(), armamento->getDano(), armamento->getQtdEstoque()
+    //                             );  					  
+    //         if (resultado == EOF)		    
+    //             printf("Erro na Gravacao\n");
+    //             fclose(arquivo);
+    //             break;
+    //     }
+    //     fclose(arquivo);
+    // }
 
     void exportarArmaduras(){
         int resultado;
@@ -647,7 +669,7 @@ public:
         if(arquivo == NULL){
             std::cout << "Arquivo Estoque.txt nao encontrado!";
         }
-
+        //--> ler arquivo e importar o estoque para as listas de itens fscanf (arquivo)?
         fclose(arquivo);
     }
 
@@ -905,7 +927,7 @@ public:
     }
 
     void exportarLogVendas(){
-        int resultadoLog;
+        
         FILE *arquivoLog;
         arquivoLog = fopen("LogVendas.txt", "a"); //w, r, a, 
         if (arquivoLog == NULL) // Se nao conseguiu criar
@@ -914,7 +936,7 @@ public:
             exit(0); //chama devolta a funcao
         }
         for (logVenda = listaLogVendas.begin(); logVenda != listaLogVendas.end(); logVenda++){
-            resultadoLog = fprintf(arquivoLog,"ID da venda -> %d;ID do item -> %d;  Nome do item -> %s; Quantidade de itens vendidos -> %d; Valor sem desconto -> %.2f PO; Valor com desconto -> %.2f PO\n\n",
+            int resultadoLog = fprintf(arquivoLog,"ID da venda -> %d;ID do item -> %d;  Nome do item -> %s; Quantidade de itens vendidos -> %d; Valor sem desconto -> %.2f PO; Valor com desconto -> %.2f PO\n\n",
                                 logVenda->getIdVenda(), logVenda->getIdItem(), logVenda->getNomeItem().c_str(), 
                                 logVenda->getQtdItens(), logVenda->getCustoInicial(), logVenda->getCustoFinal()
                                 );
@@ -945,12 +967,12 @@ public:
                     vendas.menuVendas();
                     break;
                     
-                case 0: //sair
+                case 0:   //sair
                     std::cout << "Obrigado por utilizar a nossa Loja do Aventureiro! s2\n";
                     break;
                     
                 default:  //codigo errado
-                    std::cout << "São aceitos apenas os números (0) (1) (2)\n";
+                    std::cout << "Sao aceitos apenas os numeros (0) (1) (2)\n";
                     break;
                 }
         } while(escolha != 0);
