@@ -27,14 +27,14 @@ public:  //metodos get e set
     std::string& getNome(){
         return nome;
     }
-    void setNome(const std::string nome){
+    void setNome(const std::string &nome){
         this->nome = nome;
     }
 
     std::string& getTipo(){
         return tipo;
     }
-    void setTipo(const std::string tipo){
+    void setTipo(const std::string &tipo){
         this->tipo = tipo;
     }
 
@@ -48,7 +48,7 @@ public:  //metodos get e set
     int& getQtdEstoque(){
         return qtdEstoque;
     }
-    void setQtdEstoque(const int qtdEstoque){
+    void setQtdEstoque(int qtdEstoque){
         this->qtdEstoque = qtdEstoque;
     }
 };
@@ -60,7 +60,7 @@ public:
     float& getDano(){
         return dano;
     }
-    void setDano(const float dano){
+    void setDano(const float &dano){
         this->dano = dano;
     }
 
@@ -196,7 +196,7 @@ public:
         return nomeItem;
     }
 
-    void setNomeItem(const std::string nomeItem) {
+    void setNomeItem(const std::string &nomeItem) {
         this->nomeItem = nomeItem;
     }
 
@@ -216,7 +216,7 @@ public:
         this->custoFinal = custoFinal;
     }
 
-    LogVendas(int idItem, int qtdItens, std::string nomeItem, float custoInicial, float custoFinal) {
+    LogVendas(int idItem, int qtdItens, const std::string &nomeItem, float custoInicial, float custoFinal) {
         this->idVenda = idAtualVenda++;
         this->idItem = idItem;
         this->qtdItens = qtdItens;
