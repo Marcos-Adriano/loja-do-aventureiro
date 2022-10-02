@@ -906,14 +906,7 @@ public:
         }
         arquivo.close();
     }
-    void exportarConsumiveis(){
-            for (consumivel = listaConsumiveis.begin(); consumivel != listaConsumiveis.end(); consumivel++){
-                arquivo << "ID -> " << consumivel->getId();
-                arquivo << "; Nome -> " << consumivel->getNome();
-                arquivo << "; Tipo -> " << consumivel->getTipo();
-                arquivo << "; Custo -> " << consumivel->getCusto() << " PO";
-                arquivo << "; Usos -> " << consumivel->getUsos();
-                arquivo << "; Quantidades em estoque -> " << consumivel->getQtdEstoque() << "\n\n";}}};
+};
 
 class Menu: public Vendas{
 public:
