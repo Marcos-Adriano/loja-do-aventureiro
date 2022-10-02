@@ -27,28 +27,28 @@ public:  //metodos get e set
     std::string& getNome(){
         return nome;
     }
-    void setNome(std::string nome){
+    void setNome(const std::string nome){
         this->nome = nome;
     }
 
     std::string& getTipo(){
         return tipo;
     }
-    void setTipo(std::string tipo){
+    void setTipo(const std::string tipo){
         this->tipo = tipo;
     }
 
     float& getCusto(){
         return custo;
     }
-    void setCusto(float custo){
+    void setCusto(const float custo){
         this->custo = custo;
     }
 
     int& getQtdEstoque(){
         return qtdEstoque;
     }
-    void setQtdEstoque(int qtdEstoque){
+    void setQtdEstoque(const int qtdEstoque){
         this->qtdEstoque = qtdEstoque;
     }
 };
@@ -60,7 +60,7 @@ public:
     float& getDano(){
         return dano;
     }
-    void setDano(float dano){
+    void setDano(const float dano){
         this->dano = dano;
     }
 
@@ -96,7 +96,7 @@ public:
     float& getDurabilidade(){
         return durabilidade;
     }
-    void setDurabilidade(float durabilidade){
+    void setDurabilidade(const float durabilidade){
         this->durabilidade = durabilidade;
     }
 
@@ -131,7 +131,7 @@ public:
     int& getUsos(){
         return usos;
     }
-    void setUsos(int usos){
+    void setUsos(const int usos){
         this->usos = usos;
     }
 
@@ -172,7 +172,7 @@ public:
         return idVenda;
     }
 
-    void setIdVenda(int idVenda) {
+    void setIdVenda(const int idVenda) {
         this->idVenda = idVenda;
     }
 
@@ -180,7 +180,7 @@ public:
         return idItem;
     }
 
-    void setIdItem(int idItem) {
+    void setIdItem(const int idItem) {
         this->idItem = idItem;
     }
 
@@ -188,7 +188,7 @@ public:
         return qtdItens;
     }
 
-    void setQtdItens(int qtdItens) {
+    void setQtdItens(const int qtdItens) {
         this->qtdItens = qtdItens;
     }
 
@@ -196,7 +196,7 @@ public:
         return nomeItem;
     }
 
-    void setNomeItem(std::string nomeItem) {
+    void setNomeItem(const std::string nomeItem) {
         this->nomeItem = nomeItem;
     }
 
@@ -204,7 +204,7 @@ public:
         return custoInicial;
     }
 
-    void setCustoInicial(float custoInicial) {
+    void setCustoInicial(const float custoInicial) {
         this->custoInicial = custoInicial;
     }
 
@@ -212,7 +212,7 @@ public:
         return custoFinal;
     }
 
-    void setCustoFinal(float custoFinal) {
+    void setCustoFinal(const float custoFinal) {
         this->custoFinal = custoFinal;
     }
 
