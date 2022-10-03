@@ -356,12 +356,12 @@ public:
         do
         {
             std::cout << "Voce quer remover qual tipo de item?\n";
-            std::cout << "1 - Armamento\n2 - Armadura\n3 - Consumivel\nEscolha?" ;
+            std::cout << "1 - Armamento\n2 - Armadura\n3 - Consumivel\n0 - Voltar\nEscolha?" ;
             std::cin >> escolhaRemoveItem;
             switch (escolhaRemoveItem)
             {
             case 1:
-                if(removeArmamento()){
+                if(removeArmamento()){  // se o item for removido com sucesso retorna true e sai do loop de remover
                     escolhaRemoveItem = 0;
                 }
                 break;
@@ -904,23 +904,35 @@ public:
         return false;
     }
 
-    bool ehPrimo(int numero){
+    // bool ehPrimo(int numero){
+    //     int divisores = 0; //testa somente os pares e só até a raiz do numero
+    //     for (int i = 1; i <= sqrt(numero); i+=2){
+    //         if (numero % i == 0){
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+    int ehPrimo(int numero){
         int divisores = 0;
-        for (int i = 2; i <= sqrt(numero); i++){
-            if (numero % i == 0){
+        unsigned raiz = sqrt(numero);
+        for (int i = 1; i <= numero ; i++){
+            if ((numero % i) == 0){
                 divisores++;
             }
         }
-        if (divisores == 1){
-            return true;
+        if(divisores == 2){
+            return 1;
+        } else {
+            return 0;
         }
-        return false;
     }
 
-    int qtdPrimos(int numero){ //10
+    int qtdPrimos(int numero){
         int cont = 0;
-        for (int i = 0; i <= numero; i++){
-            if (ehPrimo(i)){
+        for (int i = 1; i <= numero; i++){
+            if(ehPrimo(i) == 1){
                 cont++;
             }
         }
