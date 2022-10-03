@@ -1,0 +1,2 @@
+5 espada longa 80 5 3
+10 arco curto 80 5 6

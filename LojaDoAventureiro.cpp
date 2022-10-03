@@ -85,6 +85,16 @@ public:
         this->setQtdEstoque(qtdEstoque);
     }
 
+    Armamentos(int id, std::string nome, std::string tipo, float custo, float dano, int qtdEstoque){
+        this->setId(id);
+        this->setId(idAtual++);
+        this->setNome(nome);
+        this->setTipo(tipo);
+        this->setCusto(custo);
+        this->setDano(dano);
+        this->setQtdEstoque(qtdEstoque);
+    }
+
 };
 
 std::vector <Armamentos> listaArmamentos;
@@ -628,13 +638,52 @@ public:
     }
 
     void importarEstoque(){
-        FILE * arquivo;
-        arquivo = fopen("Estoque.txt" , "r");
-        if(arquivo == NULL){
-            std::cout << "Arquivo Estoque.txt nao encontrado!";
+        importarArmamentos(); 
+        // importarArmaduras();
+        // importarConsumiveis();
+        std::cout << "Importacao concluida!";
+    }
+
+    void importarArmamentos(){
+        int id;
+        std::ifstream arquivo("estoqueArmamentos.txt");
+        if (!arquivo.is_open()){
+            std::cout << "Arquivo nao encontrado.\n";
+        }else{
+            std::string linha;
+            // while (1){
+            // se nao existe o armamento, cria com o id++
+            // se ja existe, altera o valor na lista conforme o id 
+            // }    int id, std::string nome, std::string tipo, float custo, float dano, int qtdEstoque
+            // listaArmamentos.push_back(Armamentos(id, nome, tipo, custo, dano, qtdEstoque));           
         }
-        //--> ler arquivo e importar o estoque para as listas de itens fscanf (arquivo)?
-        fclose(arquivo);
+    }
+
+    bool armamentoExiste(int id){
+        for (armamento = listaArmamentos.begin(); armamento != listaArmamentos.end(); armamento++){
+            if (armamento->getId() == id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool armaduraExiste(int id){
+        for (armadura = listaArmaduras.begin(); armadura != listaArmaduras.end(); armadura++){
+            if (armamento->getId() == id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool consumivelExiste(int id){
+        for (consumivel = listaConsumiveis.begin(); consumivel != listaConsumiveis.end(); consumivel++){
+            if (armamento->getId() == id){
+                return true;
+            }
+        }
+        return false;
     }
 
 };
